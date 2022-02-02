@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "245889642934",
+    "project_id": "barta-3eb92",
+    "storage_bucket": "barta-3eb92.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:245889642934:android:bd8a4a9d7f34e419ec5117",
+        "android_client_info": {
+          "package_name": "com.nasirsunny.barta.barta"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "245889642934-fg072ntsqjbcvr1rmubnti07vpfu43n9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_QkdaSaQAckl2Rx0YpQyVoVaN80opGJY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "245889642934-fg072ntsqjbcvr1rmubnti07vpfu43n9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
