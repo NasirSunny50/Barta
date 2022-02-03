@@ -1,4 +1,5 @@
-import 'package:barta/sign%20in%20&%20up/LoginScreen.dart';
+import 'package:barta/Login Registration/LoginScreen.dart';
+import 'package:barta/Login%20Registration/Methods.dart';
 import 'package:flutter/material.dart';
 
 
@@ -14,13 +15,20 @@ class _CreateAccountState extends State<CreateAccount> {
   final TextEditingController _name = TextEditingController();
   final TextEditingController _email = TextEditingController();
   final TextEditingController _password = TextEditingController();
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
-        body: SingleChildScrollView(
+        body: isLoading? Center(child: Container(
+          height: size.height/20,
+          width: size.width/20,
+          child: CircularProgressIndicator(),
+        ),
+        )
+            :SingleChildScrollView(
           child: Column(
             children: [
               SizedBox(height: size.height/20,),
@@ -88,7 +96,30 @@ class _CreateAccountState extends State<CreateAccount> {
   }
   Widget customButton(Size size){
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        if(_name.text.isNotEmpty && _email.text.isNotEmpty && _password.text.isNotEmpty){
+
+          setState(() {
+            isLoading = true;
+          });
+
+          createAccount(_name.text, _email.text, _password.text).then((user) {
+            if(user != null){
+              setState(() {
+                isLoading = false;
+              });
+              print('Account Created Successful');
+            }
+            else{
+              print('Account Creation Failed');
+            }
+          });
+        }
+
+        else{
+          print("Please fill up the fields");
+        }
+      },
       child: Container(
           height: size.height/14,
           width: size.width/2,

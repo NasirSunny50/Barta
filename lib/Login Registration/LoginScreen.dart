@@ -1,3 +1,4 @@
+import 'package:barta/Login%20Registration/Methods.dart';
 import 'package:flutter/material.dart';
 
 import 'CreateAccount.dart';
@@ -13,6 +14,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   final TextEditingController _email = TextEditingController();
   final TextEditingController _password = TextEditingController();
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,11 @@ class _LoginScreenState extends State<LoginScreen> {
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
-      body: SingleChildScrollView(
+      body: isLoading? Center(child: Container(
+      child: CircularProgressIndicator(color: Colors.teal,),
+    ),
+    )
+      :SingleChildScrollView(
         child: Column(
           children: [
             SizedBox(height: size.height/20,),
@@ -87,7 +93,41 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Widget customButton(Size size){
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        if (_email.text.isNotEmpty && _password.text.isNotEmpty) {
+          setState(() {
+            isLoading = true;
+          });
+
+          logIn(_email.text, _password.text).then((user){
+
+            if(user != null){
+              setState(() {
+                isLoading = false;
+              });
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text('Login Successful'),
+                  behavior: SnackBarBehavior.floating,
+                ),
+              );
+            }
+
+            else{
+              print('Login Failed');
+            }
+          });
+        }
+
+        else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Use Valid Email & Password'),
+              behavior: SnackBarBehavior.floating,
+            ),
+          );
+          }
+      },
       child: Container(
         height: size.height/14,
         width: size.width/2,
